@@ -1,5 +1,17 @@
 'use strict';
 
+function getExpensesMonth(amount1, amount2){
+    return amount1 + amount2;
+}
+
+function getAccumulatedMonth(money, amount1, amount2){
+    return money - getExpensesMonth(amount1, amount2);
+}
+
+function getTargetMonth(mission, accumulatedMonth){
+    return Math.ceil(mission / accumulatedMonth);
+}
+
 let money = prompt('Ваш месячный доход?', '100');
 let income = 'Freelance';
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
@@ -10,10 +22,8 @@ let expenses1 = prompt('Введите обязательную статью р�
 let amount1 = prompt('Во сколько это обойдется?');
 let expenses2 = prompt('Введите обязательную статью расходов?');
 let amount2 = prompt('Во сколько это обойдется?');
-let budgetMonth = money - Number(amount1) - Number(amount2);
-let budgetDay = Math.floor(budgetMonth / 30);
-
-console.log(Math.ceil(mission / budgetMonth));
+let accumulatedMonth = getAccumulatedMonth(money, Number(amount1), Number(amount2));
+let budgetDay = Math.floor(accumulatedMonth / 30);
 
 if(budgetDay >= 1200) {
     console.log('Высокий уровень дохода');
@@ -49,3 +59,16 @@ else if(budgetDay < 0) {
 
 // console.log(res);
 // console.log(String(res).substr(0, 2));
+
+// function setString(str){
+//     if(typeof str === 'string'){
+//         str = str.trim();
+//         if(str.length > 30){
+//             str = str.substr(0, 30) + '...';
+//         }
+//         return str;
+//     }
+//     throw new RangeError('Input correct arguments');
+// }
+
+// console.log(setString('23sdlfsdflkjsdlfkjsdlfkjsdlfkjsdlfkjsldkfjsldkfjlsdkfjsldkfjsldkfjsldkfjsldkfjsldkfjs'));
