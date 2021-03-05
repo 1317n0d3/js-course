@@ -1,74 +1,91 @@
 'use strict';
 
-function getExpensesMonth(amount1, amount2){
-    return amount1 + amount2;
+let isNumber = function(n){
+    return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+let money;
+
+let start = function(){
+    do {
+        money = prompt('Ваш месячный доход?');
+    } while (!isNumber(money));
+};
+
+start();
+
+let showTypeOf = function (data){
+    console.log(data, typeof(data));
+};
+
+let expenses = [];
+
+let getExpensesMonth =  function (){
+    let sum = 0;
+
+    for(let i = 0; i < 2; i++){
+
+        expenses[i] = prompt('Введите обязательную статью расходов?');
+
+        do {
+            sum += +prompt('Во сколько это обойдется?');
+        } while (!isNumber(sum));
+    }
+
+    return sum;
 }
 
-function getAccumulatedMonth(money, amount1, amount2){
+let getAccumulatedMonth = function (money, amount1, amount2){
     return money - getExpensesMonth(amount1, amount2);
 }
 
-function getTargetMonth(mission, accumulatedMonth){
-    return Math.ceil(mission / accumulatedMonth);
+let getTargetMonth = function (mission, accumulatedMonth){
+    let res = Math.ceil(mission / accumulatedMonth);
+    if(res > 0){
+        return 'Цель будет достигнута';
+    } else {
+        return 'Цель не будет достигнута';
+    }
 }
 
-let money = prompt('Ваш месячный доход?', '100');
+let expensesAmount = getExpensesMonth();
+
 let income = 'Freelance';
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
 let deposit = confirm('Есть ли у вас депозит в банке?');
 let mission = 1000;
 let period = 1;
-let expenses1 = prompt('Введите обязательную статью расходов?');
-let amount1 = prompt('Во сколько это обойдется?');
-let expenses2 = prompt('Введите обязательную статью расходов?');
-let amount2 = prompt('Во сколько это обойдется?');
+// let expenses1 = prompt('Введите обязательную статью расходов?');
+// let amount1 = prompt('Во сколько это обойдется?');
+// let expenses2 = prompt('Введите обязательную статью расходов?');
+// let amount2 = prompt('Во сколько это обойдется?');
 let accumulatedMonth = getAccumulatedMonth(money, Number(amount1), Number(amount2));
 let budgetDay = Math.floor(accumulatedMonth / 30);
 
-if(budgetDay >= 1200) {
-    console.log('Высокий уровень дохода');
-}
-else if(budgetDay >= 600) {
-    console.log('У вас средний уровень дохода');
-}
-else if(budgetDay < 600) {
-    console.log('К сожалению у вас уровень дохода ниже среднего');
-}
-else if(budgetDay < 0) {
-    console.log('Что то пошло не так');
-}
+showTypeOf(money);
+showTypeOf(income);
+showTypeOf(deposit);
 
-// console.log(typeof money + ' ' + typeof income + ' ' + typeof deposit);
-// console.log(addExpenses.length);
-// console.log('Период равен ' + period + ' месяцев');
-// console.log('Цель заработать ' + mission + ' рублей');
+let getStatusIncome = function(){
+    if(budgetDay >= 1200) {
+        return ('Высокий уровень дохода');
+    }
+    else if(budgetDay >= 600) {
+        return ('У вас средний уровень дохода');
+    }
+    else if(budgetDay < 600) {
+        return ('К сожалению у вас уровень дохода ниже среднего');
+    }
+    else if(budgetDay < 0) {
+        return ('Что то пошло не так');
+    }
+};
 
-// console.log(addExpenses.toLowerCase().split(', '));
-// console.log(budgetDay);
+console.log(getStatusIncome());
 
+console.log(addExpenses.length);
+console.log('Период равен ' + period + ' месяцев');
+console.log('Цель заработать ' + mission + ' рублей');
 
-// let num = 266219;
-// let res = 1;
-// let arr = String(num);
-
-// for(let i = 0; i < arr.length; i++){
-//     res *= Number(arr[i]);
-// }
-// console.log(res);
-// res = res ** 3;
-
-// console.log(res);
-// console.log(String(res).substr(0, 2));
-
-// function setString(str){
-//     if(typeof str === 'string'){
-//         str = str.trim();
-//         if(str.length > 30){
-//             str = str.substr(0, 30) + '...';
-//         }
-//         return str;
-//     }
-//     throw new RangeError('Input correct arguments');
-// }
-
-// console.log(setString('23sdlfsdflkjsdlfkjsdlfkjsdlfkjsdlfkjsldkfjsldkfjlsdkfjsldkfjsldkfjsldkfjsldkfjsldkfjs'));
+console.log(addExpenses.toLowerCase().split(', '));
+console.log(budgetDay);

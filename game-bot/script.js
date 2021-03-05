@@ -19,5 +19,45 @@ let checkAnswer = function(number) {
     return alert(number);
 };
 
+let checkAnswerWithAttempts = function(){
+    let answer = Math.floor(Math.random() * 100);
+    let attempt = 10;
 
-checkAnswer(prompt("Угадай число от 1 до 100"));
+    let reset = function(){
+        answer = Math.floor(Math.random() * 100);
+        attempt = 10;
+    };
+
+    let again = function(number){
+        if(number === null){
+            return alert('The end.');
+        } else if(isNaN(number)){
+            again(prompt("Введи число!"));
+        }
+
+        attempt--;
+        if(attempt < 0){
+            return alert('Попыток больше нет');
+        }
+        
+        if(number < answer){
+            again(prompt('Загаданное число больше, осталось попыток: ' + attempt));
+        } else if(number > answer){
+            again(prompt('Загаданное число меньше, осталось попыток: ' + attempt));
+        } else {
+            alert('Вы угадали, осталось попыток: ' + attempt);
+            if(confirm('Хотите сыграть еще?')){
+                reset();
+                return again(prompt("Угадай число от 1 до 100"));
+            } else {
+                return alert('The end.');
+            }
+        }
+    };
+
+
+    return again(prompt("Угадай число от 1 до 100"));
+}
+
+
+checkAnswerWithAttempts();
