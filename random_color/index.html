@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RandomColor</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        button{
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1 id="color">#ffffff</h1>
+        <button id="change" type="button">New color</button>
+    </div>
+</body>
+<script>
+    const getRandomColor = function(){
+        const randomNumber = Math.floor(Math.random() * parseInt('ffffff', 16)).toString(16);
+        const color = document.querySelector('#color');
+        const body = document.querySelector('body');
+
+        body.style.backgroundColor = '#' + randomNumber;
+        color.textContent = '#' + randomNumber;
+    };
+
+    const changeBtn = document.querySelector('#change');
+
+    changeBtn.addEventListener('click', getRandomColor);
+
+    getRandomColor();
+
+</script>
+</html>
