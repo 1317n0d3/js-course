@@ -183,9 +183,11 @@ class AppData{
     changePercent(){
         const valueSelect = this.value;
         if(valueSelect === 'other'){
-            //HW
+            depositPercent.value = '';
+            depositPercent.style.display = 'inline-block';
         } else {
             depositPercent.value = valueSelect;
+            depositPercent.style.display = 'none';
         }
     }
 
