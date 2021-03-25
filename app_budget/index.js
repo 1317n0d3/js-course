@@ -133,7 +133,12 @@ class AppData{
 
     getInfoDeposit(){
         if(this.deposit){
-            this.percentDeposit = depositPercent.value;
+            if(depositPercent.value >= 0 && depositPercent.value <= 100){
+                this.percentDeposit = depositPercent.value;
+            } else {
+                depositPercent.value = '';
+                this.percentDeposit = 0;
+            }
             this.moneyDeposit = depositAmount.value;
         }
     }
